@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+/*use App\Http\Controllers\DiscussionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('discussions', 'DiscussionController');
+
+
+
+
