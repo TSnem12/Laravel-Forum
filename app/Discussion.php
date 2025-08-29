@@ -31,6 +31,11 @@ class Discussion extends Model
         ]);
 
 
+        if($reply->owner->id === $this->user->id) {
+            
+            return;
+        }
+
         $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
 
 
@@ -42,6 +47,25 @@ class Discussion extends Model
     }
 
 
+    public function scopeFilterByChannels($builder)
+    {
+
+        if(request()->query('channel')) {
+
+            $channel = Channel::where('slug', request()->query('channel'))->first();
+        
+            if($channel) {
+
+                return $builder->where('channel_id', $channel->id);
+            }
+
+            return $builder;
+        
+        }
+
+        return $builder;
+
+    }
 
 
 
